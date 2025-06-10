@@ -1,0 +1,37 @@
+.hero {
+    background-image: url("../../assets/hero-mage.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 436px 329px 60px 328px;
+    color: var(--white-color);
+    height: 696px;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 1.2;
+    margin-bottom: 16px;
+}
+
+.subtitle {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.33333;
+    margin-bottom: 40px;
+}
+
+.link {
+    border-radius: 12px;
+    padding: 12px 88px;
+    background-color: var(--accent-color);
+
+    font-weight: 600;
+
+    transition: background-color 350ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.link:hover,
+.link:focus {
+    background-color: var(--focus-color);
+}

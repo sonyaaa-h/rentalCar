@@ -1,4 +1,6 @@
+import Hero from "../../components/Hero/Hero";
+
 const HomeTab = () => {
-    return <div>Home page</div>;
+    return <Hero/>;
 };
 export default HomeTab;
