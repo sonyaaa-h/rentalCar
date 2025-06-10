@@ -1,22 +1,21 @@
 /* src/index.css */
 :root {
-    --text-color:  #081222;
-    --successfull-color:  #0b6016;
-    --modal-color: #508f8c;
-    --white-color: #fcfcfc;
-    --background-gradient: linear-gradient(180deg, #294045 0%, #1e2f33 100%);
-    --yellow-color: #dfad3f;
-    --primary-gradient: linear-gradient(180deg, #355359 0%, #3b5d63 100%);
-    --red-color: #b20202;
-    --pink-color:  #f23a3a;
-  }
-  
+  --text-color: #101828;
+  --gray-color: #8d929a;
+  --light-gray-color: #dadde1;
+  --focus-color: #0b44cd;
+  --akcent-color: #3470ff;
+  --header-color: #f2f4f7;
+  --white-color: #ffffff;
+  --inputs-color: #f7f7f7;
+}
+
 body {
-  font-family:  "Inter", sans-serif;
-  line-height: 1.5;
-  background-image: var(--background-gradient);
-  background-repeat: no-repeat;
-  background-size: cover;
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  color: #101828;
 }
 
 h1,
@@ -50,4 +49,3 @@ img {
   max-width: 100%;
   height: auto;
 }
-
