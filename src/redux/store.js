@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { authReducer } from "./auth/slice";
 import {
     persistStore,
     persistReducer,
@@ -11,19 +10,20 @@ import {
     REGISTER,
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+import { globalReducer } from "./global/slice";
 
 const persistConfig = {
-    key: 'auth-data',
+    key: 'user-data',
     version: 1,
     storage,
-    whilelist: ['token']
+    whitelist: ['cars']
 }
 
 
 export const store = configureStore({
     reducer: {
         //reducers
-        auth: persistReducer(persistConfig, authReducer)
+        global: persistReducer(persistConfig, globalReducer)
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

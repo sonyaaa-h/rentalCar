@@ -9,6 +9,10 @@
   --white-color: #ffffff;
   --inputs-color: #f7f7f7;
 }
+/* 
+*, ::before, ::after {
+  box-sizing: border-box;
+} */
 
 body {
   font-family: "Manrope", sans-serif;

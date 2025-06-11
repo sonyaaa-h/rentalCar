@@ -1,0 +1,66 @@
+.itemWrapper {
+    width: 276px;
+}
+
+.image {
+    border-radius: 14px;
+    height: 268px;
+    object-fit: cover;
+    margin-bottom: 16px;
+
+    /* transition: transform 0.3s ease; */
+}
+
+/* .image:hover {
+    transform: scale(1.05);
+} */
+
+.titleWrapper {
+    display: flex;
+    padding-right: 11px;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.carModel {
+    color: var(--accent-color);
+}
+
+.infoWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 0;
+    margin-bottom: 28px;
+}
+
+.info {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.33333;
+    color: var(--gray-color)
+}
+
+.info:not(:last-child)::after {
+    content: '|';
+    margin: 0 6px;
+}
+
+.typeInfo {
+    display: flex;
+}
+
+.readMore {
+    border-radius: 12px;
+    padding: 12px 97px;
+    width: 276px;
+    height: 44px;
+    background-color: var(--accent-color);
+    font-weight: 600;
+    color: var(--white-color);
+
+    transition: background-color 350ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.readMore:hover, .readMore:focus {
+    background-color: var(--focus-color);
+}
