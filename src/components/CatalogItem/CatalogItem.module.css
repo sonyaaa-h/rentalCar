@@ -1,5 +1,14 @@
 .itemWrapper {
     width: 276px;
+    position: relative;
+}
+
+.heartSvg {
+    position: absolute;
+    padding: 0;
+    background-color: transparent;
+    top: 30px;
+    right: 16px;
 }
 
 .image {
@@ -7,13 +16,7 @@
     height: 268px;
     object-fit: cover;
     margin-bottom: 16px;
-
-    /* transition: transform 0.3s ease; */
 }
-
-/* .image:hover {
-    transform: scale(1.05);
-} */
 
 .titleWrapper {
     display: flex;
@@ -61,6 +64,7 @@
     transition: background-color 350ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.readMore:hover, .readMore:focus {
+.readMore:hover,
+.readMore:focus {
     background-color: var(--focus-color);
 }

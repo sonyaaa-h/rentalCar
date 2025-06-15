@@ -9,14 +9,16 @@ export const fetchCars = createAsyncThunk(
     "cars/fetchAll",
     async ({filters,page}, thunkAPI) => {
         try {
-            console.log(filters);
-            
             const params = {
                 ...filters,
                 page 
             }
             const response = await api.get("/cars", {params});
-            return response.data;
+            return {
+                cars: response.data.cars,
+                totalPages: response.data.totalPages,
+                page
+            };
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);
         }

@@ -2,30 +2,29 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { api, fetchCars } from "../../redux/global/operations";
 import Select from "react-select";
-import { setFilters } from "../../redux/global/slice";
-import { selectfilters, selectPagination } from "../../redux/global/selectors";
+import { setFilters, setPage} from "../../redux/global/slice";
+import { selectFilters as selectReduxFilters } from "../../redux/global/selectors"; 
 import s from "./Filters.module.css";
 import { customSelect } from "../../assets/styles/customSelect";
 
 const Filters = () => {
     const dispatch = useDispatch();
     const [brands, setBrands] = useState([]);
-    const filters = useSelector(selectfilters);
-    const { page } = useSelector(selectPagination);
-    const [selectFilters, setselectFilters] = useState({
-        brand: "",
-        rentalPrice: "",
-        minMileage: "",
-        maxMileage: "",
-    });
+    const currentReduxFilters = useSelector(selectReduxFilters); 
+
+    const [selectFilters, setselectFilters] = useState(currentReduxFilters);
 
     const prices = ["30", "40", "50", "60", "70", "80"];
+
+    useEffect(() => {
+        setselectFilters(currentReduxFilters);
+    }, [currentReduxFilters]);
+
 
     useEffect(() => {
         const fetchBrands = async () => {
             try {
                 const response = await api.get("/brands");
-                console.log(response.data);
                 setBrands(response.data);
             } catch (error) {
                 console.error("Error fetch brands:", error.message);
@@ -35,10 +34,21 @@ const Filters = () => {
         fetchBrands();
     }, []);
 
+    const brandOptions = brands.map((brand) => ({
+        value: brand,
+        label: brand,
+    }));
+
+    const priceOptions = prices.map((price) => ({
+        value: price,
+        label: price,
+    }));
+
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(setFilters(selectFilters));
-        dispatch(fetchCars({ filters: selectFilters, page }));
+        dispatch(setPage(1)); 
+        dispatch(fetchCars({ filters: selectFilters, page: 1 }));
     };
 
     return (
@@ -47,19 +57,14 @@ const Filters = () => {
                 <label className={s.label}>
                     Car brand
                     <Select
-                        options={brands.map((brand) => ({
-                            value: brand,
-                            label: brand,
-                        }))}
+                        options={brandOptions}
+                        value={brandOptions.find(
+                            (option) => option.value === selectFilters.brand
+                        )}
                         classNamePrefix="custom-select"
                         placeholder="Car brand"
-                        value={
-                            filters.brand
-                                ? { value: filters.brand, label: filters.brand }
-                                : null
-                        }
                         onChange={(selected) =>
-                            setselectFilters((prev) => ({ ...prev, brand: selected?.value }))
+                            setselectFilters((prev) => ({ ...prev, brand: selected?.value || "" }))
                         }
                         className={s.select}
                         styles={customSelect}
@@ -68,16 +73,15 @@ const Filters = () => {
                 <label className={s.label}>
                     Price/ 1 hour
                     <Select
-                        options={prices.map((price) => ({
-                            value: price,
-                            label: price,
-                        }))}
+                        options={priceOptions}
+                        value={priceOptions.find(
+                            (option) => option.value === selectFilters.rentalPrice
+                        )}
                         placeholder="Price/ 1 hour"
-                        value={filters.rentalPrice ? { value: filters.rentalPrice, label: filters.rentalPrice } : null}
                         onChange={(selected) =>
                             setselectFilters((prev) => ({
                                 ...prev,
-                                rentalPrice: selected?.value,
+                                rentalPrice: selected?.value || "", 
                             }))
                         }
                         className={s.select}

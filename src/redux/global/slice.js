@@ -13,7 +13,7 @@ const initialState = {
         page: 1,
         totalPages: 0,
     },
-    isFavourete: [],
+    isFavourite: [],
     isLoading: false,
     error: null,
 };
@@ -23,10 +23,10 @@ const handlePending = (state) => {
     state.error = false;
 };
 
-// const handleRejected = (state, action) => {
-//     state.isLoading = false;
-//     state.error = action.payload;
-// };
+const handleRejected = (state, action) => {
+    state.isLoading = false;
+    state.error = action.payload;
+};
 
 const slice = createSlice({
     name: "global",
@@ -48,41 +48,32 @@ const slice = createSlice({
             state.pagination.page = 1;
             state.cars = [];
         },
-        addSelected(state, action) {
-            if (!state.selected.includes(action.payload)) {
-                state.selected.push(action.payload);
+        toggleFavourite(state, action) {
+            const id = action.payload;
+            if (state.isFavourite.includes(id)) {
+                state.isFavourite = state.isFavourite.filter((favId) => favId !== id);
+            } else {
+                state.isFavourite.push(id);
             }
-        },
-        removeSelected(state, action) {
-            state.selected = state.selected.filter((id) => id !== action.payload);
         },
     },
     extraReducers: (builder) => {
         builder
             .addCase(fetchCars.fulfilled, (state, action) => {
                 state.isLoading = false;
-                console.log(action.payload);
 
-                const page = Number(action.payload.page);
-                if (page === 1) {
+                if (state.pagination.page === 1) {
                     state.cars = action.payload.cars;
                 } else {
                     state.cars = [...state.cars, ...action.payload.cars];
                 }
                 state.pagination.totalPages = action.payload.totalPages;
-                state.pagination.page = page;
             })
-            .addCase(fetchCars.pending, handlePending);
+            .addCase(fetchCars.pending, handlePending)
+            .addCase(fetchCars.rejected, handleRejected);
     },
 });
 
-export const {
-    setPage,
-    setPrice,
-    setBrand,
-    setMinMileage,
-    setMaxMileage,
-    clearFilters,
-    setFilters,
-} = slice.actions;
+export const { setPage, clearFilters, setFilters, toggleFavourite } =
+    slice.actions;
 export const globalReducer = slice.reducer;

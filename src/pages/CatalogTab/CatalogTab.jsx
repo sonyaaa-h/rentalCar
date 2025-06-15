@@ -1,19 +1,26 @@
-import { useEffect } from "react";
+import { useEffect } from "react"; 
+import { useDispatch } from "react-redux";
+import { fetchCars } from "../../redux/global/operations";
+import { setPage, setFilters } from "../../redux/global/slice";
+
 import CatalogList from "../../components/CatalogList/CatalogList";
 import Filters from "../../components/Filters/Filters";
-import s from "./CatalogTab.module.css"
-import { useDispatch, useSelector } from "react-redux";
-import { fetchCars } from "../../redux/global/operations";
-import { selectfilters, selectPagination } from "../../redux/global/selectors";
+import s from "./CatalogTab.module.css";
 
 const CatalogTab = () => {
     const dispatch = useDispatch();
-    const filters = useSelector(selectfilters); 
-    const { page } = useSelector(selectPagination); 
 
-useEffect(() => {
-        dispatch(fetchCars({ filters, page: 1 }));
-    }, [dispatch, filters, page]);
+    useEffect(() => {
+        const initialFilters = {
+            brand: "",
+            rentalPrice: "",
+            minMileage: "",
+            maxMileage: "",
+        };
+        dispatch(setFilters(initialFilters)); 
+        dispatch(setPage(1)); 
+        dispatch(fetchCars({ filters: initialFilters, page: 1 }));
+    }, [dispatch]);
 
     return (
         <div className={s.wrapper}>
