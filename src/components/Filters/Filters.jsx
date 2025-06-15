@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { api, fetchCars } from "../../redux/global/operations";
 import Select from "react-select";
-import { setFilters, setPage} from "../../redux/global/slice";
-import { selectFilters as selectReduxFilters } from "../../redux/global/selectors"; 
+import { setFilters, setPage } from "../../redux/global/slice";
+import { selectFilters as selectReduxFilters } from "../../redux/global/selectors";
 import s from "./Filters.module.css";
 import { customSelect } from "../../assets/styles/customSelect";
 
 const Filters = () => {
     const dispatch = useDispatch();
     const [brands, setBrands] = useState([]);
-    const currentReduxFilters = useSelector(selectReduxFilters); 
+    const currentReduxFilters = useSelector(selectReduxFilters);
 
     const [selectFilters, setselectFilters] = useState(currentReduxFilters);
 
@@ -19,7 +19,6 @@ const Filters = () => {
     useEffect(() => {
         setselectFilters(currentReduxFilters);
     }, [currentReduxFilters]);
-
 
     useEffect(() => {
         const fetchBrands = async () => {
@@ -44,10 +43,14 @@ const Filters = () => {
         label: price,
     }));
 
+    const formatNumber = (value) => {
+        return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(setFilters(selectFilters));
-        dispatch(setPage(1)); 
+        dispatch(setPage(1));
         dispatch(fetchCars({ filters: selectFilters, page: 1 }));
     };
 
@@ -64,7 +67,10 @@ const Filters = () => {
                         classNamePrefix="custom-select"
                         placeholder="Car brand"
                         onChange={(selected) =>
-                            setselectFilters((prev) => ({ ...prev, brand: selected?.value || "" }))
+                            setselectFilters((prev) => ({
+                                ...prev,
+                                brand: selected?.value || "",
+                            }))
                         }
                         className={s.select}
                         styles={customSelect}
@@ -74,14 +80,19 @@ const Filters = () => {
                     Price/ 1 hour
                     <Select
                         options={priceOptions}
-                        value={priceOptions.find(
-                            (option) => option.value === selectFilters.rentalPrice
-                        )}
+                        value={
+                            selectFilters.rentalPrice
+                                ? {
+                                    value: selectFilters.rentalPrice,
+                                    label: `To $${selectFilters.rentalPrice}`,
+                                }
+                                : null
+                        }
                         placeholder="Price/ 1 hour"
                         onChange={(selected) =>
                             setselectFilters((prev) => ({
                                 ...prev,
-                                rentalPrice: selected?.value || "", 
+                                rentalPrice: selected?.value || "",
                             }))
                         }
                         className={s.select}
@@ -93,12 +104,12 @@ const Filters = () => {
                     <div className={s.fromWrapper}>
                         <p className={s.inputText}>From</p>
                         <input
-                            type="number"
-                            value={selectFilters.minMileage}
+                            type="text"
+                            value={formatNumber(selectFilters.minMileage)}
                             onChange={(e) =>
                                 setselectFilters((prev) => ({
                                     ...prev,
-                                    minMileage: e.target.value,
+                                    minMileage: e.target.value.replace(/\D/g, ""),
                                 }))
                             }
                             className={s.mileageInput}
@@ -107,12 +118,12 @@ const Filters = () => {
                     <div className={s.toWrapper}>
                         <p className={s.inputText}>To</p>
                         <input
-                            type="number"
-                            value={selectFilters.maxMileage}
+                            type="text"
+                            value={formatNumber(selectFilters.maxMileage)}
                             onChange={(e) =>
                                 setselectFilters((prev) => ({
                                     ...prev,
-                                    maxMileage: e.target.value,
+                                    maxMileage: e.target.value.replace(/\D/g, ""),
                                 }))
                             }
                             className={s.mileageInput}

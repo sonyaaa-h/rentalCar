@@ -27,7 +27,7 @@
     height: 40px;
     border-radius: 50%;
     border: 3px solid transparent;
-    border-bottom-color: #FF3D00;
+    border-bottom-color: var(--focus-color);
 }
 
 @keyframes rotation {

@@ -34,6 +34,8 @@ export const customSelect = {
         fontWeight: 500,
         fontSize: " 16px",
         borderRadius: "12px",
+        '&:hover': {
+        color: '#101828',}
     }),
     singleValue: (provided) => ({
         ...provided,

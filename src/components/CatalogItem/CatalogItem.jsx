@@ -45,7 +45,7 @@ const CatalogItem = ({
             </button>
             <img src={img} alt={`${brand} ${model}`} className={s.image}></img>
             <div className={s.titleWrapper}>
-                <p>
+                <p className={s.nameCar}>
                     {brand} <span className={s.carModel}>{model}</span>, {year}
                 </p>
                 <p>${rentalPrice}</p>

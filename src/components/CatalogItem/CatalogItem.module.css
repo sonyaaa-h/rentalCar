@@ -25,6 +25,12 @@
     margin-bottom: 8px;
 }
 
+.nameCar {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .carModel {
     color: var(--accent-color);
 }
