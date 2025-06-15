@@ -8,8 +8,8 @@ import CatalogItem from "../CatalogItem/CatalogItem";
 import s from "./CatalogList.module.css";
 // import { fetchCars } from "../../redux/global/operations";
 import { setPage } from "../../redux/global/slice";
-import { useEffect } from "react";
-import { fetchCars } from "../../redux/global/operations";
+// import { useEffect } from "react";
+// import { fetchCars } from "../../redux/global/operations";
 
 const CatalogList = () => {
     const dispatch = useDispatch();
@@ -19,9 +19,9 @@ const CatalogList = () => {
     console.log(filters);
     
 
-    useEffect(() => {
-        dispatch(fetchCars({...filters, page}));
-    }, [dispatch, page, filters]);
+    // useEffect(() => {
+    //     dispatch(fetchCars({...filters, page}));
+    // }, [dispatch, page, filters]);
 
     const handleClick = () => {
         dispatch(setPage(page + 1));

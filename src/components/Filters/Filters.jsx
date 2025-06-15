@@ -2,21 +2,22 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { api, fetchCars } from "../../redux/global/operations";
 import Select from "react-select";
-import {
-    setBrand,
-    setMaxMileage,
-    setMinMileage,
-    setPage,
-    setPrice,
-} from "../../redux/global/slice";
+import { setFilters } from "../../redux/global/slice";
 import { selectfilters, selectPagination } from "../../redux/global/selectors";
 import s from "./Filters.module.css";
+import { customSelect } from "../../assets/styles/customSelect";
 
 const Filters = () => {
     const dispatch = useDispatch();
     const [brands, setBrands] = useState([]);
     const filters = useSelector(selectfilters);
     const { page } = useSelector(selectPagination);
+    const [selectFilters, setselectFilters] = useState({
+        brand: "",
+        rentalPrice: "",
+        minMileage: "",
+        maxMileage: "",
+    });
 
     const prices = ["30", "40", "50", "60", "70", "80"];
 
@@ -24,7 +25,7 @@ const Filters = () => {
         const fetchBrands = async () => {
             try {
                 const response = await api.get("/brands");
-                console.log(response.data); // тут приходить масив брендів
+                console.log(response.data);
                 setBrands(response.data);
             } catch (error) {
                 console.error("Error fetch brands:", error.message);
@@ -36,8 +37,8 @@ const Filters = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(setPage(1));
-        dispatch(fetchCars({ filters, page }));
+        dispatch(setFilters(selectFilters));
+        dispatch(fetchCars({ filters: selectFilters, page }));
     };
 
     return (
@@ -50,12 +51,18 @@ const Filters = () => {
                             value: brand,
                             label: brand,
                         }))}
-                        // className="customSelect"
-                        // classNamePrefix="custom-select"
-                        placeholder="Choose a brand"
-                        value={brands.find((b) => b.value === filters.brand)}
-                        onChange={(selected) => dispatch(setBrand(selected.value))}
+                        classNamePrefix="custom-select"
+                        placeholder="Car brand"
+                        value={
+                            filters.brand
+                                ? { value: filters.brand, label: filters.brand }
+                                : null
+                        }
+                        onChange={(selected) =>
+                            setselectFilters((prev) => ({ ...prev, brand: selected?.value }))
+                        }
                         className={s.select}
+                        styles={customSelect}
                     />
                 </label>
                 <label className={s.label}>
@@ -65,12 +72,16 @@ const Filters = () => {
                             value: price,
                             label: price,
                         }))}
-                        // className="customSelect"
-                        // classNamePrefix="custom-select"
-                        placeholder="Choose a price"
-                        value={prices.find((p) => p.value === filters.rentalPrice)}
-                        onChange={(selected) => dispatch(setPrice(selected.value))}
+                        placeholder="Price/ 1 hour"
+                        value={filters.rentalPrice ? { value: filters.rentalPrice, label: filters.rentalPrice } : null}
+                        onChange={(selected) =>
+                            setselectFilters((prev) => ({
+                                ...prev,
+                                rentalPrice: selected?.value,
+                            }))
+                        }
                         className={s.select}
+                        styles={customSelect}
                     />
                 </label>
                 <fieldset className={s.mileage}>
@@ -78,25 +89,35 @@ const Filters = () => {
                     <div className={s.fromWrapper}>
                         <p className={s.inputText}>From</p>
                         <input
-                            // placeholder="From"
                             type="number"
-                            value={filters.minMileage}
-                            onChange={(event) => dispatch(setMinMileage(event.target.value))}
+                            value={selectFilters.minMileage}
+                            onChange={(e) =>
+                                setselectFilters((prev) => ({
+                                    ...prev,
+                                    minMileage: e.target.value,
+                                }))
+                            }
                             className={s.mileageInput}
                         />
                     </div>
                     <div className={s.toWrapper}>
                         <p className={s.inputText}>To</p>
                         <input
-                            // placeholder="To"
                             type="number"
-                            value={filters.maxMileage}
-                            onChange={(event) => dispatch(setMaxMileage(event.target.value))}
+                            value={selectFilters.maxMileage}
+                            onChange={(e) =>
+                                setselectFilters((prev) => ({
+                                    ...prev,
+                                    maxMileage: e.target.value,
+                                }))
+                            }
                             className={s.mileageInput}
                         />
                     </div>
                 </fieldset>
-                <button type="submit" className={s.search}>Search</button>
+                <button type="submit" className={s.search}>
+                    Search
+                </button>
             </form>
         </div>
     );

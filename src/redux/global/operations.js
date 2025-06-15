@@ -7,13 +7,13 @@ export const api = axios.create({
 
 export const fetchCars = createAsyncThunk(
     "cars/fetchAll",
-    async ({filters, page}, thunkAPI) => {
+    async ({filters,page}, thunkAPI) => {
         try {
             console.log(filters);
             
             const params = {
                 ...filters,
-                page
+                page 
             }
             const response = await api.get("/cars", {params});
             return response.data;
