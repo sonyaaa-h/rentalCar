@@ -35,7 +35,7 @@ const CatalogItem = ({
     }
 
     return (
-        <div className={s.itemWrapper}>
+        <li className={s.itemWrapper}>
             <button onClick={() => handleFavourite(id)} className={s.heartBtn}>
                 {!checkFavourite ? (
                     <img src={heart} alt="select" className={s.heartSvg} />
@@ -45,9 +45,9 @@ const CatalogItem = ({
             </button>
             <img src={img} alt={`${brand} ${model}`} className={s.image}></img>
             <div className={s.titleWrapper}>
-                <p className={s.nameCar}>
+                <h2 className={s.nameCar}>
                     {brand} <span className={s.carModel}>{model}</span>, {year}
-                </p>
+                </h2>
                 <p>${rentalPrice}</p>
             </div>
             <div className={s.infoWrapper}>
@@ -62,7 +62,7 @@ const CatalogItem = ({
             <Link to={`/catalog/${id}`} className={s.readMore}>
                 Read more
             </Link>
-        </div>
+        </li>
     );
 };
 export default CatalogItem;

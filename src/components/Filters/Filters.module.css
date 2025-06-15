@@ -63,7 +63,8 @@
     outline: none;
 }
 
-.search {
+.search,
+.reset {
     border-radius: 12px;
     padding: 12px 51px;
     width: 156px;
@@ -78,6 +79,8 @@
 }
 
 .search:hover,
-.search:focus {
+.search:focus,
+.reset:hover,
+.reset:focus {
     background-color: var(--focus-color);
 }

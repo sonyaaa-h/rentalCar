@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { api, fetchCars } from "../../redux/global/operations";
 import Select from "react-select";
-import { setFilters, setPage } from "../../redux/global/slice";
+import { clearFilters, setFilters, setPage } from "../../redux/global/slice";
 import { selectFilters as selectReduxFilters } from "../../redux/global/selectors";
 import s from "./Filters.module.css";
 import { customSelect } from "../../assets/styles/customSelect";
@@ -54,6 +54,17 @@ const Filters = () => {
         dispatch(fetchCars({ filters: selectFilters, page: 1 }));
     };
 
+    const handleReset = () => {
+        dispatch(clearFilters());
+        setselectFilters({
+            brand: "",
+            rentalPrice: "",
+            minMileage: "",
+            maxMileage: "",
+        });
+        dispatch(fetchCars({ filters: {}, page: 1 }));
+    };
+
     return (
         <div className={s.formWrapper}>
             <form onSubmit={handleSubmit} className={s.form}>
@@ -61,9 +72,13 @@ const Filters = () => {
                     Car brand
                     <Select
                         options={brandOptions}
-                        value={brandOptions.find(
-                            (option) => option.value === selectFilters.brand
-                        )}
+                        value={
+                            selectFilters.brand
+                                ? brandOptions.find(
+                                    (option) => option.value === selectFilters.brand
+                                )
+                                : null
+                        }
                         classNamePrefix="custom-select"
                         placeholder="Car brand"
                         onChange={(selected) =>
@@ -132,6 +147,9 @@ const Filters = () => {
                 </fieldset>
                 <button type="submit" className={s.search}>
                     Search
+                </button>
+                <button type="button" className={s.reset} onClick={handleReset}>
+                    Reset
                 </button>
             </form>
         </div>
