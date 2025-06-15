@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import s from "./CatalogItem.module.css";
+import { formatAddress, formatMileage, formatType } from "../../utils/FormatingData";
 
 const CatalogItem = ({
+    id,
     brand,
     model,
     img,
@@ -12,9 +14,9 @@ const CatalogItem = ({
     rentalCompany,
     rentalPrice,
 }) => {
-    const carAddress = address.split(",");
-    const carType = type.charAt(0) + type.slice(1).toLowerCase();
-    const carMileage = mileage.toLocaleString("uk-UA");
+    const carAddress = formatAddress(address);
+    const carType = formatType(type);
+    const carMileage = formatMileage(mileage)
 
     return (
         <div className={s.itemWrapper}>
@@ -34,7 +36,7 @@ const CatalogItem = ({
                     <p className={s.info}>{carMileage} km</p>
                 </div>
             </div>
-            <Link className={s.readMore}>Read more</Link>
+            <Link to={`/catalog/${id}`}className={s.readMore}>Read more</Link>
         </div>
     );
 };

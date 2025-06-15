@@ -16,7 +16,7 @@ const persistConfig = {
     key: 'user-data',
     version: 1,
     storage,
-    whitelist: ['cars']
+    whitelist: ["isFavourite"]
 }
 
 

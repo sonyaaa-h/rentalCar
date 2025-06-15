@@ -1,0 +1,20 @@
+.detailsWrapper {
+    display: flex;
+    margin-top: 84px;
+    gap: 72px;
+    padding: 0 120px;
+}
+
+.formWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    /* width: 640px; */
+    /* flex-shrink: 0; */
+}
+
+.img {
+    border-radius: 19px;
+    width: 640px;
+    height: 512px;
+}

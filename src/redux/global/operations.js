@@ -7,11 +7,15 @@ export const api = axios.create({
 
 export const fetchCars = createAsyncThunk(
     "cars/fetchAll",
-    async (_, thunkAPI) => {
+    async ({filters, page}, thunkAPI) => {
         try {
-            const response = await api.get("/cars");
-            console.log(response.data);
+            console.log(filters);
             
+            const params = {
+                ...filters,
+                page
+            }
+            const response = await api.get("/cars", {params});
             return response.data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);
