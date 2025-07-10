@@ -1,35 +1,35 @@
 # 🚘 RentalCar Frontend
 
-Цей проект є клієнтською частиною (frontend) веб-додатку "RentalCar", розробленого для оренди автомобілів. Він взаємодіє з бекенд API, документація до якого доступна за посиланням: [https://car-rental-api.goit.global/api-docs/](https://car-rental-api.goit.global/api-docs/).
+This project is the client side (frontend) of the RentalCar web application developed for car rental. It interacts with the backend API, the documentation for which is available here: [https://car-rental-api.goit.global/api-docs/](https://car-rental-api.goit.global/api-docs/).
 
-Основна мета проекту — надати зручний та інтуїтивно зрозумілий інтерфейс для перегляду доступних автомобілів, їх фільтрації, додавання до обраного та бронювання.
+The main goal of the project is to provide a convenient and intuitive interface for viewing available cars, filtering them, adding them to favorites, and booking them.
 
-## ✨ Ключові Особливості
+## ✨ Key Features
 
-* **Перегляд каталогу автомобілів**: Зручний інтерфейс для перегляду всіх доступних авто.
-* **Фільтрація автомобілів**: Можливість фільтрувати автомобілі за маркою, ціною та діапазоном пробігу. Фільтрація виконується на стороні бекенду для оптимізації продуктивності.
-* **Додавання/Видалення з Обраного**: Функціонал для додавання та видалення автомобілів до/з списку обраних. Обрані елементи зберігаються локально та залишаються доступними після перезавантаження сторінки.
-* **Детальна сторінка автомобіля**: Окрема сторінка для кожного автомобіля з повним описом, додатковими фотографіями та формою бронювання.
-* **Пагінація "Load More"**: Кнопка "Завантажити ще" для підвантаження додаткових автомобілів з урахуванням застосованих фільтрів (пагінація реалізована на бекенді).
-* **Форматування пробігу**: Пробіг автомобіля відображається з роздільниками тисяч для кращої читабельності (наприклад, "5 000 km").
+** **Browse the car catalog**: A user-friendly interface for viewing all available cars.
+** **Car filtering**: Ability to filter cars by brand, price and mileage range. Filtering is performed on the backend to optimize performance.
+** **Add/Remove from Favorites**: Functionality for adding and removing cars to/from the list of favorites. Favorites are saved locally and remain available after the page reloads.
+** **Car detail page**: A separate page for each car with a full description, additional photos and a booking form.
+* **Load More Pagination**: "Load More" button for uploading additional cars based on the applied filters (pagination is implemented on the backend).
+* Mileage formatting**: Vehicle mileage is displayed with thousands separators for better readability (e.g. "5,000 km").
 
-## 🛠️ Використані Технології
+## 🛠️ Technologies Used
 
-* **React**: Сучасна JavaScript-бібліотека для побудови користувацьких інтерфейсів.
-* **Vite**: Швидкий інструмент збірки (bundler) для розробки сучасних веб-проектів.
-* **Redux Toolkit**: Ефективний інструмент для управління станом застосунку.
-* **React Router**: Бібліотека для маршрутизації в React-додатках.
-* **Axios**: Проміс-орієнтований HTTP-клієнт для здійснення запитів до API.
-* **CSS Modules**: Метод для ізоляції CSS-стилів на рівні компонентів, що запобігає конфліктам.
-* **Formik** та **Yup**: Бібліотеки для спрощення створення форм та їх валідації.
-* **react-datepicker**: Компонент для вибору дати.
+** **React**: Modern JavaScript library for building user interfaces.
+* Vite: A fast builder tool for developing modern web projects.
+* Redux Toolkit: An effective tool for managing application state.
+* React Router: A library for routing in React applications.
+* Axios: A process-oriented HTTP client for making API requests.
+* CSS Modules: A method for isolating CSS styles at the component level to prevent conflicts.
+** **Formik** and **Yup**: Libraries to simplify form creation and validation.
+** **react-datepicker**: Component for date picker.
 
-## 🚀 Маршрути (Routes)
+## 🚀 Routes
 
-* `/` &mdash; **Домашня сторінка**: Містить банер та заклик до дії (Call to Action).
-* `/catalog` &mdash; **Сторінка каталогу**: Відображає список автомобілів, панель фільтрів.
-* `/catalog/:id` &mdash; **Детальна сторінка автомобіля**: Показує детальну інформацію про конкретний автомобіль та форму бронювання.
+* `/` &mdash; **Home Page**: Contains a banner and a call to action.
+* `/catalog` &mdash; **Catalog Page**: Displays a list of cars, a filter panel.
+* `/catalog/:id` &mdash; **Car detail page**: Displays detailed information about a specific car and a booking form.
 
-## 👩🏻‍💼 Автор
+## 👩🏻‍💼 Author
 
-[Sofiia Horiacha](https://github.com/sonyaaa-h) ---
+[Sofiia Horiacha](https://github.com/sonyaaa-h)
